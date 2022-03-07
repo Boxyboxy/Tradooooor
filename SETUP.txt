@@ -1,0 +1,25 @@
+Configurations required on heroku before deployment:
+
+1. iex_api_key
+  Visit iexcloud.io/cloud-login#/register/.
+  Select the “Individual” account type, then enter your email address and a password, and click “Create account”.
+  Once registered, scroll down to “Get started for free” and click “Select Start” to choose the free plan.
+  Once you’ve confirmed your account via a confirmation email, visit https://iexcloud.io/console/tokens.
+  Copy the key that appears under the Token column (it should begin with pk_).
+2. SPRING_MAIL_USERNAME
+  Configure Spring mail for sending email.
+  https://www.baeldung.com/spring-email
+3. SPRING_MAIL_PASSWORD
+  Configure app password to be used for spring email.
+  https://support.google.com/accounts/answer/185833?hl=en
+4. SPRING_DATASOURCE_USERNAME
+  Deploy your database onto Digital Ocean.
+  Initialise database on digital ocean and configure rights and privileges on workbench.
+  https://www.cloudsavvyit.com/9146/how-to-create-a-managed-mysql-database-on-digitalocean/#:~:text=Login%20to%20your%20DigitalOcean%20control,the%20%E2%80%9CCluster%20configuration%E2%80%9D%20section.
+5. SPRING_DATASOURCE_PASSWORD
+
+ 
+
+Google OAuth2 credentials and Google Maps API key is also required for the application to work. Useful links with regards to Google OAuth2 and Google Maps API.
+https://www.npmjs.com/package/angularx-social-login
+https://www.npmjs.com/package/ngx-google-map
