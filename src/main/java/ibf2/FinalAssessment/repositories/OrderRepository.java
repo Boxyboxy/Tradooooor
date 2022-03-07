@@ -1,6 +1,7 @@
 package ibf2.FinalAssessment.repositories;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class OrderRepository {
         order.getSymbol(),
         order.getShares(),
         order.getPrice(),
-        order.getTimeStamp());
+        Timestamp.from(order.getTimeStamp()));
     if (created > 0) {
       return (order.getPrice().multiply(BigDecimal.valueOf(order.getShares())));
     } else {

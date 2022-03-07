@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import ibf2.FinalAssessment.models.Shares;
 import ibf2.FinalAssessment.models.User;
+import ibf2.FinalAssessment.services.EmailSenderService;
 import ibf2.FinalAssessment.services.IEXService;
 import ibf2.FinalAssessment.services.TradeService;
 import ibf2.FinalAssessment.services.UserService;
@@ -27,6 +28,10 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping(path = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
+
+  @Autowired
+  @Qualifier(EMAIL_SERVICE)
+  public EmailSenderService emailSenderService;
 
   @Autowired
   @Qualifier(IEX_SERVICE)
@@ -61,6 +66,8 @@ public class UserController {
     Optional<Integer> opt = userSvc.createUser(newUser);
 
     if (opt.isEmpty()) {
+      emailSenderService.sendEmail(newUser.getEmail(), "Account created at NUS-ISS Broker",
+          "Account created at NUS-ISS Broker. Welcome to start trading!");
       JsonObject success;
       success = Json.createObjectBuilder()
           .add("message",

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -17,7 +18,7 @@ public class Order {
   private String symbol;
   private Integer shares;
   private BigDecimal price;
-  private Date timeStamp;
+  private Instant timeStamp;
 
   public Integer getOrderId() {
     return orderId;
@@ -59,11 +60,11 @@ public class Order {
     this.price = price;
   }
 
-  public Date getTimeStamp() {
+  public Instant getTimeStamp() {
     return timeStamp;
   }
 
-  public void setTimeStamp(Date timeStamp) {
+  public void setTimeStamp(Instant timeStamp) {
     this.timeStamp = timeStamp;
   }
 
@@ -74,8 +75,8 @@ public class Order {
     order.symbol = rs.getString("symbol");
     order.shares = rs.getInt("shares");
     order.price = rs.getBigDecimal("price");
-    // System.out.println(rs.getTimestamp("time_stamp"));
-    // order.timeStamp = rs.getObject("time_stamp", Date.class);
+    System.out.println(rs.getDate("time_stamp"));
+    order.timeStamp = rs.getTimestamp("time_stamp").toInstant();
     // order.timeStamp =
     // java.sql.Timestamp.valueOf(rs.getTimestamp("time_stamp").toLocalDateTime());
     return order;
@@ -95,7 +96,9 @@ public class Order {
     tradeOrder.symbol = o.getString("symbol");
     tradeOrder.shares = o.getInt("shares");
     tradeOrder.price = (o.getJsonNumber("price").bigDecimalValue());
-    tradeOrder.timeStamp = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(o.getString("timeStamp"));
+    tradeOrder.timeStamp = Instant.now();
+    // tradeOrder.timeStamp = (new SimpleDateFormat("yyyy-MM-dd
+    // HH:mm:ss")).parse(o.getString("timeStamp"));
     return tradeOrder;
   }
 
@@ -106,7 +109,7 @@ public class Order {
         .add("symbol", symbol)
         .add("shares", shares)
         .add("price", price)
-        // .add("timeStamp", timeStamp.toString())
+        .add("timeStamp", timeStamp.toString())
         .build();
   }
 }

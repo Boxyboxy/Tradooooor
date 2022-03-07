@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ibf2.FinalAssessment.models.Order;
 import ibf2.FinalAssessment.models.User;
+import ibf2.FinalAssessment.services.EmailSenderService;
 import ibf2.FinalAssessment.services.IEXService;
 import ibf2.FinalAssessment.services.TradeService;
 import ibf2.FinalAssessment.services.UserService;
@@ -28,6 +28,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/trade", produces = MediaType.APPLICATION_JSON_VALUE)
 public class OrderController {
+
+  @Autowired
+  @Qualifier(EMAIL_SERVICE)
+  public EmailSenderService emailSenderService;
 
   @Autowired
   @Qualifier(IEX_SERVICE)
@@ -86,6 +90,9 @@ public class OrderController {
     Optional<Integer> opt = tradeSvc.buy(order);
 
     if (opt.isEmpty()) {
+      emailSenderService.sendEmail(order.getEmail(), "NUS-ISS Broker: Buy order succeeded.",
+          String.format("%d share(s) of %s bought at %s USD. ", order.getShares(), order.getSymbol(),
+              order.getPrice()));
       JsonObject success;
 
       success = Json.createObjectBuilder()
@@ -148,6 +155,9 @@ public class OrderController {
     Optional<Integer> opt = tradeSvc.sell(order);
 
     if (opt.isEmpty()) {
+      emailSenderService.sendEmail(order.getEmail(), "NUS-ISS Broker: Sell order succeeded.",
+          String.format("%d share(s) of %s sold at %s USD. ", order.getShares(), order.getSymbol(),
+              order.getPrice()));
       JsonObject success = Json.createObjectBuilder()
           .add("message",
               String.format("%d share(s) of %s  sold at %s USD", -(order.getShares()), order.getSymbol(),

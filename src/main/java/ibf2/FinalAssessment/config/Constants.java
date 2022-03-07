@@ -11,4 +11,6 @@ public class Constants {
 
   public static final String USER_SERVICE = "user_service";
 
+  public static final String EMAIL_SERVICE = "email_service";
+
 }

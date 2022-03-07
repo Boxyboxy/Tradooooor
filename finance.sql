@@ -16,7 +16,7 @@ CREATE TABLE orders (
   symbol varchar(64) NOT NULL,
   shares int NOT NULL,
   price decimal(19, 2) NOT NULL,
-  timestamp datetime,
+  time_stamp timestamp,
   PRIMARY KEY(order_id),
   CONSTRAINT fk_email FOREIGN KEY(email) REFERENCES users(email)
 );
