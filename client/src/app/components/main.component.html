@@ -1,0 +1,60 @@
+<section class="intro-section">
+  <div fxLayout="column" fxLayoutAlign="center center" class="roll-height">
+    <div class="container">
+      <table *ngIf="socialUser">
+        <tr>
+          <td class="transparent">
+            <img src="{{ socialUser.photoUrl }}" alt="" />
+          </td>
+        </tr>
+        <tr>
+          <td class="user-name">
+            <h3>Welcome {{ socialUser.name }}</h3>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="portfolio" class="container">
+      <table
+        class="table table-bordered table-striped table-responsive-stack"
+        id="tableOne"
+      >
+        <thead class="thead-dark">
+          <tr mat-header-row>
+            <th mat-header-cell scope="col">Symbol</th>
+            <th mat-header-cell scope="col">Company Name</th>
+            <th mat-header-cell scope="col">Quantity</th>
+            <th mat-header-cell scope="col">Total Cost (USD)</th>
+            <th mat-header-cell scope="col">Current Value (USD)</th>
+            <th mat-header-cell scope="col">PnL (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equity of portfolio">
+            <td mat-cell>{{ equity.symbol | uppercase }}</td>
+            <td mat-cell *ngIf="equity.quotes">
+              {{ equity.quotes.companyName }}
+            </td>
+            <td mat-cell>{{ equity.quantity }}</td>
+            <td mat-cell>{{ equity.totalCost }}</td>
+            <!-- <td mat-cell>{{ order.timeStamp }}</td> -->
+            <td mat-cell *ngIf="equity.quotes">
+              {{ equity.quotes.price * equity.quantity }}
+            </td>
+            <td mat-cell *ngIf="equity.quotes">
+              {{ equity.quotes.price * equity.quantity - equity.totalCost }}
+            </td>
+          </tr>
+          <tr class="bg-success">
+            <th scope="row" colspan="4">Remaining Cash</th>
+            <td colspan="2">{{ userObj.cash }}</td>
+          </tr>
+          <tr class="bg-primary">
+            <th scope="row" colspan="4">TOTAL VALUATION</th>
+            <td colspan="2">{{ totalValue }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

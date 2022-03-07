@@ -1,0 +1,56 @@
+<section class="intro-section">
+  <div fxFill fxLayout="column" fxLayoutAlign="center center">
+    <div class="container" fxFlex="50">
+      <form [formGroup]="form">
+        <mat-card>
+          <mat-form-field>
+            <mat-label>Ticker:</mat-label>
+            <input
+              formControlName="ticker"
+              matInput
+              autofocus
+              placeholder="Stock symbol"
+              class="form-control"
+            />
+            <mat-error
+              *ngIf="!form.get('ticker')?.valid && form.get('ticker')?.touched"
+            >
+              Please enter a ticker
+            </mat-error>
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="quote()"
+            [disabled]="!form.valid"
+          >
+            Quote
+          </button>
+        </mat-card>
+      </form>
+    </div>
+
+    <div *ngIf="stock" class="container">
+      <table
+        class="table table-bordered table-striped table-responsive-stack"
+        id="tableOne"
+      >
+        <thead class="thead-dark">
+          <tr mat-header-row>
+            <th mat-header-cell scope="col">Symbol</th>
+            <th mat-header-cell scope="col">Company Name</th>
+            <th mat-header-cell scope="col">Current Price (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td mat-cell>{{ stock.symbol }}</td>
+            <td mat-cell>{{ stock.companyName }}</td>
+            <td mat-cell>{{ stock.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

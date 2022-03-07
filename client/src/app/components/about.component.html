@@ -1,0 +1,47 @@
+<div class="container-fluid" fxLayout="column" fxLayoutAlign="center center">
+  <div class="text">
+    <h4>
+      An application designed and developed by Eugene Ng as a final project
+      submission for NUS-ISS Software Engineering (IBF2021).
+    </h4>
+
+    <h4>
+      Special thanks to Lee Chuk Munn, Kenneth Phang, Xiao Fuchun and my
+      brilliant coursemates for imparting their invaluable knowledge and the
+      wonderful experience.
+    </h4>
+  </div>
+  <div class="text">
+    <h2>About NUS-ISS</h2>
+    <h4>
+      Established in 1981, the Institute of Systems Science at National
+      University of Singapore (NUS-ISS) provides graduate education, executive
+      education programmes, consultancy and research services. To date, more
+      than 148,000 digital leaders and professionals, 7,700 corporate customers
+      and 6,620 post-graduate alumni have benefitted from NUS-ISS’ suite of
+      services.
+      <br />
+      Find out more about them <a href="https://www.iss.nus.edu.sg/">here</a> .
+    </h4>
+  </div>
+  <google-map
+    height="300px"
+    width="500px"
+    [zoom]="zoom"
+    [center]="center"
+    [options]="options"
+  >
+    <map-marker
+      *ngFor="let markerPosition of markerPositions"
+      [position]="markerPosition"
+      [options]="markerOptions"
+    ></map-marker>
+    <map-info-window>Info Window content</map-info-window>
+  </google-map>
+  <div class="address" fxLayout="column" fxLayoutAlign="start none">
+    <h5>
+      Institute of Systems Science
+      <h6>25 Heng Mui Keng Terrace, Singapore 119615</h6>
+    </h5>
+  </div>
+</div>

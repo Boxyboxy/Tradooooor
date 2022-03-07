@@ -1,0 +1,51 @@
+<div fxFill fxLayout="column" fxLayoutAlign="center center">
+  <div class="container">
+    <form [formGroup]="form">
+      <mat-card fxLayout="column" fxLayoutAlign="start center">
+        <mat-form-field>
+          <mat-label>Symbol:</mat-label>
+          <input
+            formControlName="symbol"
+            matInput
+            autofocus
+            placeholder="Stock symbol"
+            class="form-control"
+          />
+          <mat-error
+            *ngIf="!form.get('symbol')?.valid && form.get('symbol')?.touched"
+          >
+            Please enter a ticker/symbol for your purchase.
+          </mat-error>
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+          <mat-label>Shares:</mat-label>
+          <input
+            formControlName="shares"
+            matInput
+            autofocus
+            placeholder="No. of shares"
+            class="form-control"
+            type="number"
+          />
+          <mat-error
+            *ngIf="!form.get('shares')?.valid && form.get('shares')?.touched"
+          >
+            Please indicate the number of shares to purchase.
+          </mat-error>
+        </mat-form-field>
+        <br />
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="buyStock()"
+          [disabled]="!form.valid"
+        >
+          Buy
+        </button>
+      </mat-card>
+    </form>
+  </div>
+</div>

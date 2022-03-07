@@ -1,0 +1,30 @@
+td,
+th {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 6px;
+}
+
+table {
+  border-spacing: 0.5rem;
+}
+
+th {
+  background-color: orange;
+  color: whitesmoke;
+}
+
+td {
+  background-color: whitesmoke;
+}
+
+.container {
+  flex: inline;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.intro-section {
+  height: 500px;
+}

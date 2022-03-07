@@ -1,0 +1,52 @@
+<div *ngIf="toolbarService.loggedIn; else elseBlock">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a mat-button [routerLink]="['/']"
+        ><h1 class="rainbow">NU$-I$$ &nbsp;</h1>
+        <h1 class="orange">Broker 🤑</h1>
+      </a>
+      <span class="menu-spacer"></span>
+      <div class="orange">
+        <a mat-button [routerLink]="['/', 'quote']"> Quote </a>
+        <a mat-button [routerLink]="['/', 'buy']"> Buy </a>
+        <a mat-button [routerLink]="['/', 'sell']"> Sell </a>
+        <a mat-button [routerLink]="['/', 'history']"> History </a>
+      </div>
+      <div class="spacer"></div>
+
+      <a mat-button [routerLink]="['/', 'about']" class="orange">About</a>
+
+      <button mat-button [matMenuTriggerFor]="menu" class="avatar-text">
+        <img class="avatar" src="{{ socialUser.photoUrl }}" alt="" />&#9660;
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item class="orange matMenu" (click)="logout()">
+          Logout
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
+<ng-template #elseBlock>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a mat-button [routerLink]="['/', 'login']"
+        ><h1 class="rainbow">NU$-I$$ &nbsp;</h1>
+        <h1 class="orange">Broker 🤑</h1>
+      </a>
+      <span class="menu-spacer"></span>
+      <div class="orange">
+        <a mat-button [routerLink]="['/', 'quote']"> Quote </a>
+      </div>
+      <div class="spacer"></div>
+
+      <a mat-button [routerLink]="['/', 'about']" class="orange">About</a>
+      <!-- <a mat-button routerLink="/" class="orange">Register</a> -->
+      <a mat-button [routerLink]="['/', 'login']" class="orange">Login</a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</ng-template>
+<body>
+  <router-outlet class="routlet"></router-outlet>
+</body>

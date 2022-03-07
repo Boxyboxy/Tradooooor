@@ -1,0 +1,38 @@
+.spacer {
+  flex: 1 1 auto;
+}
+.rainbow {
+  background-image: linear-gradient(
+    to left,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.orange {
+  color: orange;
+}
+
+.matMenu {
+  background-color: #3f51b5;
+}
+
+body {
+  background-image: url("..\\assets\\images\\bg3.jpg");
+  background-repeat: repeat;
+}
+.avatar {
+  border-radius: 50%;
+  width: 40px;
+}
+
+.avatar-text {
+  color: whitesmoke;
+}
